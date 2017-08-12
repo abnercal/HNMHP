@@ -31,6 +31,4 @@ Route::group(['prefix'=>'proveedor'], function(){
 	});
 
 });
-
-
 //Route::get();
