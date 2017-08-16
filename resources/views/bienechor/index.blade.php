@@ -5,7 +5,7 @@
         <!-- <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> -->
     @endsection
 
-@section ('content')
+@section ('contenido')
     <div class="tab-pan active" id="contentsecundario">
  
         <div class="row">
@@ -16,11 +16,14 @@
         </div>
 
             <div class="row">
-                <div><br></div>
-                <div class="margin" id="botones_control">
-                    <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Paciente</button>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <div><br></div>
+                    <div class="margin" id="botones_control">
+                        <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Paciente</button>
+                    </div>
+                    <div><br></div>
                 </div>
-                <div><br></div>
             </div>
 
             <div class="row">
