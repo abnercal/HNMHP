@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.index');
+    return view('layouts.login');
 });
 
 
@@ -31,3 +31,6 @@ Route::group(['prefix'=>'proveedor'], function(){
 	});
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
