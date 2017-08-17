@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Persona;
 use Illuminate\Support\Collection;
 use DB;
+use Validator;
 
 class CBienhechor extends Controller
 {
@@ -16,12 +17,43 @@ class CBienhechor extends Controller
     	$bienhechor=DB::table('persona as p')
     	->join('status as sts','p.idstatus','=','sts.idstatus')
     	->join('tipopersona as tp','tp.idtipopersona','=','p.idtipopersona')
-    	->join('donacion as don','p.idpersona','=','don.idpersona')
-    	->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.correo','don.fechadonacion','sts.nombre as snombre')
- 		->where('sts.nombre','=','Activo')
- 		->where('tp.tipopersona','=','Bienhechor')
- 		->paginate(20);
+    	->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo','sts.nombre as snombre')
+ 		//->where('sts.nombre','=','Activo')
+ 		->where('tp.idtipopersona','=',2)
+ 		->get();
 
- 		return view('bienechor.index',["bienhechor"=>$bienhechor]);
+ 		$tipop=DB::table('tipopersona as tp')->where('tp.tipopersona','=','Bienhechor')->get();
+ 		return view('bienechor.index',["bienhechor"=>$bienhechor,"tipop"=>$tipop]);
     }
+
+    public function nuevobienhechor(Request $request)
+    {
+    	//dd('prueba');
+    	$this->validabienhechor($request);
+
+    	$bienhe=new Persona;
+    	$bienhe-> nombre=$request->get('nombreb');
+    	$bienhe-> apellido=$request->get('apellidob');
+    	$bienhe-> direccion=$request->get('direccion');
+    	$bienhe-> telefono=$request->get('telefono');
+    	$bienhe-> idtipopersona=$request->get('tipopersona');
+    	$bienhe-> nit=$request->get('nit');
+    	$bienhe-> correo=$request->get('correo');
+    	$bienhe-> idstatus='1';
+        $bienhe-> permanente=$request->get('tipobienhechor');
+        $bienhe->save();
+        //dd($bienhe);
+        return response()->json($bienhe);
+    }
+    public function validabienhechor($request){
+            $rules=[
+            'nombreb' => 'required',
+            'telefono' => 'required',
+
+            ];
+            $messages=[
+            'required' => 'Debe ingresar :attribute.',
+            ];
+            $this->validate($request, $rules,$messages);        
+        }
 }

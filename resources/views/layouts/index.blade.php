@@ -84,7 +84,7 @@
                         <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
 >>>>>>> 85cc3e10df0bc2e0e8812e33d5a75447e8eb77b9
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="{{ url('/bienechor/listado')}}">Listado bienhechor</a></li>
+                            <li><a href="{{ url('/bienhechor/index')}}">Listado bienhechor</a></li>
                         </ul>
                     </li>
 

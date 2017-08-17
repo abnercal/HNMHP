@@ -64,31 +64,23 @@
                         <table class="table table-striped table-bordered table-condensed table-hover"> 
                             <thead>
                                 <th style="width: 5%">Id</th>
-                                <th style="width: 20%">Nombre</th>
-                                <th style="width: 20%">Email</th>
-                                <th>tipo_donador</th>
+                                <th style="width: 20%">Nombre completo</th>
+                                <th style="width: 20%">Dirección</th>
+                                <th style="width: 20%">Teléfono</th>
                                 <th style="width: 10%">Opciones</th>
                             </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>Abner Calvac</td>
-                                <td>bcavalc@gmail.com</td>
-                                <td>Permanente</td>
-                                <td>
-                                    <button class="btn btn-primary" title="Detalles"><i class="glyphicon glyphicon-zoom-in"></i></button>
-                                    <button class="btn btn-danger" id="FWEF" value="" title="Despedir" ><i class="fa fa-remove"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Luis Alberto López</td>
-                                <td>llopez@gmail.com</td>
-                                <td>Ocasional</td>
-                                <td>
-                                    <button class="btn btn-primary" title="Detalles"><i class="glyphicon glyphicon-zoom-in"></i></button>
-                                    <button class="btn btn-danger" id="FWEF" value="" title="Despedir" ><i class="fa fa-remove"></i></button>
-                                </td>
-                            </tr>
+                            @foreach ($bienhechor as $em)
+                                <tr class="even gradeA">
+                                    <td>{{$em->idpersona}}</td>
+                                    <td>{{$em->nombre.' '.$em->apellido}}</td>
+                                    <td>{{$em->direccion}}</td>
+                                    <td>{{$em->telefono}}</td>
+                                    <td>
+                                        <button class="btn btn-primary" title="Detalles"><i class="glyphicon glyphicon-zoom-in"></i></button>
+                                        <button class="btn btn-danger" id="FWEF" value="" title="Despedir" ><i class="fa fa-remove"></i></button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                     </div>
 
@@ -112,56 +104,62 @@
                                 <h4 class="modal-title" id="inputTitle"></h4>
                             </div>
 
-                        <form role="form" id="form">
+                        <form role="form" id="formAgregar">
                             <div class="modal-header">
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Identificación</label>
-                                    <input id="nombreC" type="text" class="form-control" name="dias" aria-describedby="basic-addon1">   
+                                    <label class="control-label">Nombre</label>
+                                    <input id="nombreb" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label">Apellido</label>
+                                    <input id="apellidob" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label">Correo</label>
+                                    <input type="email" id="correo" maxlength="40" class="form-control" required>   
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label class="control-label">Teléfono</label>
+                                    <input id="telefono" type="text" class="form-control" maxlength="8" aria-describedby="basic-addon1" onkeypress="return valida(event)">   
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Nit</label>
-                                    <input id="nombreC" type="text" class="form-control" name="dias" aria-describedby="basic-addon1">   
+                                    <input id="nit" type="text" class="form-control" maxlength="9" aria-describedby="basic-addon1">   
                                 </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Nombre</label>
-                                    <input id="nombreC" type="text" class="form-control" name="dias" aria-describedby="basic-addon1">   
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Apellido</label>
-                                    <input id="nombreC" type="text" class="form-control" name="dias" aria-describedby="basic-addon1">   
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Fecha ingreso</label>
-                                    <input type="text" id="fecha_inicio" class="form-control" name="fechainicio">
-                                </div>
-
-                                <div class="modal-header">
-                                    <label>Tipo de bienechor</label><br>
-                                    <select id="select" data-style="btn-info" data-live-search="true">
-                                        <option>Permanentes</option>
-                                        <option>Ocasionales</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                     <label class="control-label">Dirección</label>
-                                    <input type="text" id="fecha_inicio" class="form-control" name="fechainicio">
+                                    <input type="text" id="direccion" class="form-control">
                                 </div>
-
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label>Descripcion</label>
-                                    <textarea class="form-control" placeholder=".........." id="observaciones" rows="3" maxlength="300"></textarea>
+                                
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
+                                    <div class="form-group">
+                                        <label>Tipo de bienhechor *</label>
+                                        <select name="tipobienhechor" id="tipobienhechor" class="form-control">
+                                            <option value="Permanente">Permanente</option>
+                                            <option value="Ocasional">Ocasional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="display: none;">    
+                                    <div class="form-group">
+                                        <label>Persona</label>
+                                        <select name="tipopersona" id="tipopersona" class="form-control">
+                                            @foreach($tipop as $tp)
+                                                <option value="{{$tp->idtipopersona}}">{{$tp->tipopersona}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                           </div> 
                         </form>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary btn-adddespedir" id="btnGuardarBaja">Guardar</button>
+                            <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
                             <input type="hidden" name="idE" id="idE" value="0"/>
                         </div>
                     </div>
@@ -169,25 +167,33 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="erroresModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Errores</h4>
+          </div>
 
-    <input type="hidden"  id="url_raiz_proyecto" value="{{ url("/") }}" />
-    <div id="capa_modal" class="div_modal" style="display: none;"></div>
-    <div id="capa_formularios" class="div_contenido" style="display: none;"></div>
+          <div class="modal-body">
+            <ul style="list-style-type:circle" id="erroresContent"></ul>
+          </div>
 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('fin')
-    @parent
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).on('click','.btn-addB',function(){
-                    $('#inputTitle').html("Agregar nuevo bienechor");
-                    $('#formAgregar').trigger("reset");
-                    $('#formModal').modal('show');
-            });
-        });
-    </script>
+<meta name="_token" content="{!! csrf_token() !!}" />
+@parent
+<script src="{{asset('assets/js/bienhechor.js')}}"></script>
+    
 @endsection
 
 
