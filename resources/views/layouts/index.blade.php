@@ -16,6 +16,7 @@
 
     <title>HNMHP</title>
 
+    @section('estilos')
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
@@ -27,7 +28,7 @@
 
     <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-
+    @show
 </head>
 
 <body>
@@ -77,12 +78,13 @@
                     </li>
                     
                     <li>
+<<<<<<< HEAD
                         <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Bienechores</span>  <span class="fa arrow"></span></a>
+=======
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
+>>>>>>> 85cc3e10df0bc2e0e8812e33d5a75447e8eb77b9
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="contacts.html">Listado</a></li>
-                            <li><a href="profile.html">Ingreso binechor</a></li>
-                            <li><a href="pin_board.html">Ingreso donacion</a></li>
-                            <li><a href="pin_board.html">Listado donacion</a></li>
+                            <li><a href="{{ url('/bienechor/listado')}}">Listado bienhechor</a></li>
                         </ul>
                     </li>
 
@@ -1150,6 +1152,7 @@
         </div>
 
     </div>
+<<<<<<< HEAD
 
     @include('seguridad.usuario.create')
 
@@ -1162,7 +1165,10 @@ nav.navbar {
 }
     </style>
 
+=======
+>>>>>>> 85cc3e10df0bc2e0e8812e33d5a75447e8eb77b9
     <!-- Mainly scripts -->
+    @section('fin')
     <script src="{{asset('assets/js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
@@ -1309,5 +1315,6 @@ nav.navbar {
 
         });
     </script>
+    @show
 </body>
 </html>
