@@ -17,8 +17,9 @@ Route::get('/', function () {
 
 
 // se agrega todas las rutas del bienechor, donaciones entre otros
-Route::group(['prefix'=>'bienechor'], function(){
-	Route::get('listado', 'CBienhechor@index');
+Route::group(['prefix'=>'bienhechor'], function(){
+	Route::get('index','CBienhechor@index');
+	Route::post('add','CBienhechor@nuevobienhechor');
 
 });
 
