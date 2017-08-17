@@ -10,7 +10,7 @@
             </div>
 
             <div class="navbar-form navbar-left pull-rigth">
-                    <button class="btn btn-primary btn-addB" title="Nuevo Empleado">Nuevo Empleado</button>
+                <a href="add"><button class="btn btn-primary btn-addEmpleado" title="Nuevo Empleado">Nuevo Empleado</button></a>
             </div>
         </div>
     </div>
