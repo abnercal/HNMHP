@@ -114,7 +114,7 @@
                     </div>
 
                     <!-- COLOCAR COLOR AL NAV -->
-                    <ul class="nav navbar-top-links navbar-right" >
+                    <ul class="nav navbar-top-links navbar-right ">
                         <li>
                             <span class="m-r-sm text-muted welcome-message">Welcome to HNMHP.</span>
                         </li>
@@ -1142,6 +1142,15 @@
         </div>
 
     </div>
+
+    <style type="text/css">
+        
+ 
+/* cambiar el color de fondo a la barra */
+nav.navbar {
+    background-color: #1C1C1C;
+}
+    </style>
 
     <!-- Mainly scripts -->
     <script src="{{asset('assets/js/jquery-3.1.1.min.js')}}"></script>
