@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h3>Listado de bienechores permanentes, ocasionales</h3>
+            <h2>Listado de Bienhechores</h2>
         <div class="navbar-form navbar-left pull-right">
 
             <div class="navbar-form navbar-left pull-left">

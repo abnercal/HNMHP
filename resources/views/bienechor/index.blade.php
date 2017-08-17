@@ -20,7 +20,7 @@
 
                     <div><br></div>
                     <div class="margin" id="botones_control">
-                        <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Paciente</button>
+                        <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Bienhechor</button>
                     </div>
                     <div><br></div>
                 </div>
