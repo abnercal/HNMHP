@@ -60,7 +60,7 @@
                     </li>
                     
                     <li>
-                        <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Paciente</span><span class="fa arrow"></span></a>
+                        <a href="layouts.html"><i class="fa fa-wheelchair"></i> <span class="nav-label">Paciente</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="graph_flot.html">Ingreso de paciente</a></li>
                             <li><a href="graph_morris.html">otros</a></li>
@@ -68,7 +68,7 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Medicamentos</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-medkit"></i> <span class="nav-label">Medicamentos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="graph_flot.html">Ingreso de medicamento</a></li>
                             <li><a href="graph_morris.html">Ingreso de proveedores</a></li>
@@ -77,7 +77,7 @@
                     </li>
                     
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienechores</span>  <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Bienechores</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="contacts.html">Listado</a></li>
                             <li><a href="profile.html">Ingreso binechor</a></li>
@@ -87,11 +87,19 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Empleado</span>  <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-group"></i> <span class="nav-label">Empleado</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="contacts.html">Listado</a></li>
-                            <li><a href="profile.html">Ingreso empleado</a></li>
-                            <li><a href="pin_board.html">Ingreso antecedentes</a></li>
+                            <li><a href="{{url('/empleado/index')}}">Listado</a></li>
+                            <li><a href="{{url('/empleado/add')}}">Ingreso empleado</a></li>
+                            <li><a href="{{url('/empleado/index')}}">Ingreso antecedentes</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Uusario</span>  <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="{{url('/seguridad/index')}}">Listado</a></li>
+                            <li><a href="javascript:void(0);" onclick="cargarmodalempleado(1);">Ingreso Usuario</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -1143,6 +1151,8 @@
 
     </div>
 
+    @include('seguridad.usuario.create')
+
     <style type="text/css">
         
  
@@ -1190,6 +1200,13 @@ nav.navbar {
 
     <!-- Toastr -->
     <script src="{{asset('assets/js/plugins/toastr/toastr.min.js')}}"></script>
+
+    <!--rutas del empleado-->
+        <meta name="_token" content="{!! csrf_token() !!}" />
+
+    <script src="{{asset('assets/js/empleado/modal.js')}}"></script>
+    <script src="{{asset('assets/js/empleado/usuario.js')}}"></script>
+
 
 
     <script>

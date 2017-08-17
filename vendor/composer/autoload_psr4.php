@@ -39,5 +39,6 @@ return array(
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
     'Cron\\' => array($vendorDir . '/mtdowling/cron-expression/src/Cron'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
+    'Caffeinated\\Shinobi\\' => array($vendorDir . '/caffeinated/shinobi/src'),
     'App\\' => array($baseDir . '/app'),
 );

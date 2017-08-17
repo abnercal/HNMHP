@@ -42,6 +42,7 @@ class UController extends Controller
         	{
                 $usuarios = User::name($request->get('name'))->orderBy('id','DESC')->paginate(15);
                 $roles=Role::all();
+                $persona=Persona::all();
                 return view('seguridad.usuario.index',compact('usuarios','roles'));  
         	}
         }
@@ -59,21 +60,24 @@ class UController extends Controller
 
         public function add()
         {
-            //return view("seguridad.usuario.create",["personas"=>$personas,"articulos"=>$articulos]);
-        	//$empleados=DB::table('persona')->where('tipo_persona','=','empleado')->get();
-        	//return view("seguridad.usuario.create",["empleados"=>$empleados])
         	$usuario = user::all();
         	return view("seguridad.usuario.create",["usuario"=>$usuario]);
         }
-        public function store(UFormRequest $request)
+        public function store(Request $request)
         {
         	$usuario=new User;
         	$usuario->name=$request->get('name');
         	$usuario->email=$request->get('email');
         	$usuario->password=bcrypt($request->get('password'));
-        	$usuario->identificacion=$request->get('identificacion');
+        	$usuario->idpersona=$request->get('idpersona');
         	$usuario->save();
-        	return Redirect::to('seguridad/usuario');		
+
+        	$usuarios = User::name($request->get('name'))->orderBy('id','DESC')->paginate(15);
+            $roles=Role::all();
+            $persona=Persona::all();
+
+            
+            return view('seguridad.usuario.index',compact('usuarios','roles'));  
         }
 
         public function editar_usuario($id)
@@ -139,7 +143,7 @@ class UController extends Controller
         	
         public function destroy($id)
         {
-        	$usuario =DB::table('users')->where('id','=',$id)->delete();
+        	$usuario =DB::table('usuario')->where('id','=',$id)->delete();
         	return Redirect::to('seguridad/usuario');
         }
 

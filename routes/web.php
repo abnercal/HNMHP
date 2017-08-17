@@ -51,6 +51,14 @@ Route::group(['prefix'=>'empleado'], function(){
 });
 
 
+Route::group(['prefix'=>'seguridad'], function(){
+	Route::get('index','UController@index');
+	Route::get('add','UController@add');
+	Route::post('store','UController@store');
+});
+
+
+
 
 
 
