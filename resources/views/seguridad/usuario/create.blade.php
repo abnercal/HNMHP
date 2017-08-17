@@ -53,12 +53,12 @@
                         <div class="form-group">
                         <div><br></div>
 
-                            <label class="col-md-4 control-label">Empleado</label>
+                            <label class="col-md-4 control-label">Motivo ausencia</label>
                             <div class="col-md-6">
                                 <select name="idpersona" id="idpersona" class="form-control select2" data-live-search="true">
                                 @if (isset($persona))
                                 @foreach($persona as $per)
-                                    <option value="{{$per->$per}}">{{$per->nombre.' '.$per->apellido}}</option>
+                                    <option value="{{$per->$per}}">{{$per->nombre.' '}}</option>
                                 @endforeach
                                 @endif
                                 </select>

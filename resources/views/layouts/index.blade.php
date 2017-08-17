@@ -78,11 +78,7 @@
                     </li>
                     
                     <li>
-<<<<<<< HEAD
-                        <a href="#"><i class="fa fa-male"></i> <span class="nav-label">Bienechores</span>  <span class="fa arrow"></span></a>
-=======
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
->>>>>>> 85cc3e10df0bc2e0e8812e33d5a75447e8eb77b9
+            <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="{{ url('/bienechor/listado')}}">Listado bienhechor</a></li>
                         </ul>
@@ -1152,7 +1148,6 @@
         </div>
 
     </div>
-<<<<<<< HEAD
 
     @include('seguridad.usuario.create')
 
@@ -1165,8 +1160,7 @@ nav.navbar {
 }
     </style>
 
-=======
->>>>>>> 85cc3e10df0bc2e0e8812e33d5a75447e8eb77b9
+
     <!-- Mainly scripts -->
     @section('fin')
     <script src="{{asset('assets/js/jquery-3.1.1.min.js')}}"></script>
@@ -1212,6 +1206,8 @@ nav.navbar {
 
     <script src="{{asset('assets/js/empleado/modal.js')}}"></script>
     <script src="{{asset('assets/js/empleado/usuario.js')}}"></script>
+
+    
 
 
 

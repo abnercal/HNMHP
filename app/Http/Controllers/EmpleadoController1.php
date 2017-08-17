@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TipoPersona;
 
 class EmpleadoController1 extends Controller
 {
@@ -13,7 +14,8 @@ class EmpleadoController1 extends Controller
 
     public function add(Request $request)
     {
-        return view('empleado.create');
+        $tipopersona = TipoPersona::all()->where('idtipopersona','!=','2');
+        return view('empleado.create')->with("tipopersona", $tipopersona);
     }
 
     public function store()
