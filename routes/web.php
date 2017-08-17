@@ -1,5 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
 Route::get('/', function () {
     return view('layouts.index');
  });
@@ -23,7 +34,7 @@ Route::group(['prefix'=>'paciente'], function(){
 });
 
 // se agrega todas las rutas del medicamento, proveedor entre otros
-Route::group(['prefix'=>'Medicamento'], function(){
+Route::group(['prefix'=>'medicamento'], function(){
 
 	Route::get('add', function () {
     	return view('');
@@ -31,10 +42,16 @@ Route::group(['prefix'=>'Medicamento'], function(){
 });
 
 // se agrega toda las rutas del empleado
-Route::group(['prefix'=>'Empleado'], function(){
-
-	Route::get('add', function () {
-    	return view('');
-	});
+Route::group(['prefix'=>'empleado'], function(){
+	Route::get('index','EmpleadoController1@index');
+	Route::get('add','EmpleadoController1@add');
+	Route::post('store','EmpleadoController1@store');
+	Route::post('update','EmpleadoController1@edit');
+	Route::post('delete','EmpleadoController1@modal');
 });
+
+
+
+
+
 
