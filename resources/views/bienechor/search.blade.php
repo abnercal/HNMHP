@@ -14,7 +14,9 @@
             	<input type="text" class="form-control" id="searchText" name="searchText" placeholder="Buscar..."> 
             </div>
 
-            <button type="button" class="btn btn-default" onclick="buscarempleado();">Buscar</button>
+
+
+            <button type="button" class="btn btn-primary btn-rounded" onclick="buscarempleado();">Buscar</button>
             </div>
 
             <!--
