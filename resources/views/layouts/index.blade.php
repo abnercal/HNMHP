@@ -80,7 +80,7 @@
                     <li>
             <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="{{ url('/bienechor/listado')}}">Listado bienhechor</a></li>
+                            <li><a href="{{ url('/bienhechor/index')}}">Listado bienhechor</a></li>
                         </ul>
                     </li>
 
