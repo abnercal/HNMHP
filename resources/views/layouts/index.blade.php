@@ -16,6 +16,7 @@
 
     <title>HNMHP</title>
 
+    @section('estilos')
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
 
@@ -27,7 +28,7 @@
 
     <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-
+    @show
 </head>
 
 <body>
@@ -77,12 +78,9 @@
                     </li>
                     
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienechores</span>  <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Bienhechores</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li><a href="contacts.html">Listado</a></li>
-                            <li><a href="profile.html">Ingreso binechor</a></li>
-                            <li><a href="pin_board.html">Ingreso donacion</a></li>
-                            <li><a href="pin_board.html">Listado donacion</a></li>
+                            <li><a href="{{ url('/bienechor/listado')}}">Listado bienhechor</a></li>
                         </ul>
                     </li>
 
@@ -1142,8 +1140,8 @@
         </div>
 
     </div>
-
     <!-- Mainly scripts -->
+    @section('fin')
     <script src="{{asset('assets/js/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
@@ -1283,5 +1281,6 @@
 
         });
     </script>
+    @show
 </body>
 </html>
