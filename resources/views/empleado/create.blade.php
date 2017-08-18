@@ -5,10 +5,8 @@
 
 
     <link href="{{asset('assets/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/css/plugins/footable/footable.core.css')}}" rel="stylesheet">
-
-
-        <!-- <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> -->
+    <link href="{{asset('assets/css/plugins/footable/footable.core.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> -->
     @endsection
 
 @section ('contenido')
@@ -20,7 +18,7 @@
             <h2 class="box-title"><strong>Agregar nuevo empleado</strong></h2>
         </div>
 
-                <div class="panel-body">     
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                            <div class="form-group">
@@ -113,8 +111,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
-
-                            <label>Tipo Persona</label>
+                                <label>Tipo Persona</label>
                                 <select name="idtipopersona" id="idtipopersona" class="form-control select2" data-live-search="true">
                                 @if (isset($tipopersona))
                                 @foreach($tipopersona as $tip)
@@ -122,6 +119,7 @@
                                 @endforeach
                                 @endif
                                 </select>
+                            </div>
                         </div>
 
                         <!--
@@ -141,11 +139,10 @@
                                 <button class="btn btn-danger" type="reset">Cancelar</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </div>       
+    </div>
+</div>       
 
 @endsection
 

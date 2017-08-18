@@ -33,134 +33,133 @@ use Intervention\Image\Facades\Image as Image;
 class UController extends Controller
 {
     public function contenedor(Request $request)
-        {
-            return view('seguridad.usuario.contenedor');
-        }
-        public function index(Request $request)
-        {
-        	if($request)
-        	{
-                $usuarios = User::name($request->get('name'))->orderBy('id','DESC')->paginate(15);
-                $roles=Role::all();
-                $persona=Persona::all();
-                return view('seguridad.usuario.index',compact('usuarios','roles'));  
-        	}
-        }
-
-        public function buscar_usuarios($rol,$dato="")
-        {
-            $usuarios= User::Busqueda($rol,$dato)->paginate(15);  
-            $roles=Role::all();
-            $rolsel=$roles->find($rol);
-            return view('seguridad.usuario.index')
-            ->with("usuarios", $usuarios )
-            ->with("rolsel", $rolsel )
-            ->with("roles", $roles );       
-        } 
-
-        public function add()
-        {
-        	$usuario = user::all();
-        	return view("seguridad.usuario.create",["usuario"=>$usuario]);
-        }
-        public function store(Request $request)
-        {
-        	$usuario=new User;
-        	$usuario->name=$request->get('name');
-        	$usuario->email=$request->get('email');
-        	$usuario->password=bcrypt($request->get('password'));
-        	$usuario->idpersona=$request->get('idpersona');
-        	$usuario->save();
-
-        	$usuarios = User::name($request->get('name'))->orderBy('id','DESC')->paginate(15);
+    {
+        return view('seguridad.usuario.contenedor');
+    }
+    public function index(Request $request)
+    {
+      
+            $usuarios = User::name($request->get('name'))->orderBy('id','DESC')->paginate(15);
             $roles=Role::all();
             $persona=Persona::all();
 
-            
-            return view('seguridad.usuario.index',compact('usuarios','roles'));  
-        }
+            return view('seguridad.usuario.index',compact('usuarios','roles','persona'));  
 
-        public function editar_usuario($id)
-        {
-            $usuario=User::find($id);
-            $roles=Role::all();
-            return view("seguridad.usuario.editarusuario")
+
+    }
+
+    public function buscar_usuarios($rol,$dato="")
+    {
+        $usuarios= User::Busqueda($rol,$dato)->paginate(15);  
+        $roles=Role::all();
+        $rolsel=$roles->find($rol);
+        return view('seguridad.usuario.index')
+            ->with("usuarios", $usuarios )
+            ->with("rolsel", $rolsel )
+            ->with("roles", $roles );       
+    } 
+
+    public function add()
+    {
+        $usuario = user::all();
+        $persona = Persona::all();
+
+        return view("seguridad.usuario.modalcreate",array('usuario'=>$usuario,'persona'=>$persona));
+    }
+    public function store(Request $request)
+    {
+        $usuario=new User;
+        $usuario->name=$request->get('name');
+        $usuario->email=$request->get('email');
+        $usuario->password=bcrypt($request->get('password'));
+        $usuario->idpersona=$request->get('idpersona');
+        $usuario->save();
+
+        return response()->json($usuario);
+    }
+
+    public function editar_usuario($id)
+    {
+        $usuario=User::find($id);
+        $roles=Role::all();
+        return view("seguridad.usuario.editarusuario")
             ->with("usuario",$usuario)
             ->with("roles",$roles);
-        }
+    }
 
-        public function asignar_rol($idusu,$idrol){
-            $usuario=User::find($idusu);
-            $usuario->assignRole($idrol);
+    public function asignar_rol($idusu,$idrol){
+        $usuario=User::find($idusu);
+        $usuario->assignRole($idrol);
 
-            $usuario=User::find($idusu);
-            $rolesasignados=$usuario->getRoles();
-            return json_encode ($rolesasignados); 
-        }
+        $usuario=User::find($idusu);
+        $rolesasignados=$usuario->getRoles();
+        return json_encode ($rolesasignados); 
+    }
 
-        public function quitar_rol($idusu,$idrol){
-            $usuario=User::find($idusu);
-            $usuario->revokeRole($idrol);
-            $rolesasignados=$usuario->getRoles();
-            return json_encode ($rolesasignados);
-        }
+    public function quitar_rol($idusu,$idrol){
+        $usuario=User::find($idusu);
+        $usuario->revokeRole($idrol);
+        $rolesasignados=$usuario->getRoles();
+        return json_encode ($rolesasignados);
+    }
 
-        public function form_nuevo_rol(){
-            //carga el formulario para agregar un nuevo rol
-            $roles=Role::all();
-            return view("seguridad.usuario.form_nuevo_rol")->with("roles",$roles);
-        }
-
-        public function crear_rol(Request $request){
-            $rol=new Role;
-            $rol->name=$request->input("rol_nombre") ;
-            $rol->slug=$request->input("rol_slug") ;
-            $rol->description=$request->input("rol_descripcion") ;
-            if($rol->save())
-            {
-                return view("mensajes.msj_rol_creado")->with("msj","Rol agregado correctamente") ;
-            }
-            else
-            {
-                return view("mensajes.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
-            }
-        }
-        public function borrar_rol($idrole){
-            $role = Role::find($idrole);
-            $role->delete();
-            return "ok";
-        }
-        public function update(UsuarioFormRequest $request, $id)
+    public function form_nuevo_rol(){
+        //carga el formulario para agregar un nuevo rol
+        $roles=Role::all();
+        return view("seguridad.usuario.form_nuevo_rol")->with("roles",$roles);
+    }
+        
+    public function crear_rol(Request $request){
+        $rol=new Role;
+        $rol->name=$request->input("rol_nombre") ;
+        $rol->slug=$request->input("rol_slug") ;
+        $rol->description=$request->input("rol_descripcion") ;
+        if($rol->save())
         {
-            $usuario=User::findOrFail($id);
-        	$usuario->name=$request->get('name');
-        	$usuario->email=$request->get('email');
-        	$usuario->password=bcrypt($request->get('password'));
-        	$usuario->id_persona=$request->get('id_persona');
-        	$usuario->update();
-        	return Redirect::to('seguridad/usuario');
+            return view("mensajes.msj_rol_creado")->with("msj","Rol agregado correctamente") ;
         }
+        else
+        {
+            return view("mensajes.mensaje_error")->with("msj","...Hubo un error al agregar ;...") ;
+        }
+    }
+    
+    public function borrar_rol($idrole){
+        $role = Role::find($idrole);
+        $role->delete();
+        return "ok";
+    }
+    public function update(UsuarioFormRequest $request, $id)
+    {
+        $usuario=User::findOrFail($id);
+        $usuario->name=$request->get('name');
+        $usuario->email=$request->get('email');
+        $usuario->password=bcrypt($request->get('password'));
+        $usuario->id_persona=$request->get('id_persona');
+        $usuario->update();
+        	return Redirect::to('seguridad/usuario');
+    }
         	
-        public function destroy($id)
+    public function destroy($id)
+    {
+        $usuario =DB::table('usuario')->where('id','=',$id)->delete();
+    	return Redirect::to('seguridad/usuario');
+    }
+
+    public function cambiar_password(Request $request){
+        $this->validateRequestPassword($request);
+        $id=$request->get('idusuario');
+        $usuario=User::find($id);
+        $password=$request->input("password");
+        $usuario->password=bcrypt($password);
+        $r=$usuario->save();
+
+        if($r){
+            return response()->json($usuario);
+        }
+        else
         {
-        	$usuario =DB::table('usuario')->where('id','=',$id)->delete();
-        	return Redirect::to('seguridad/usuario');
+            return view("mensajes.msj_rechazado")->with("msj","Error al actualizar el password");
         }
-
-        public function cambiar_password(Request $request){
-                $this->validateRequestPassword($request);
-                $id=$request->get('idusuario');
-                $usuario=User::find($id);
-                $password=$request->input("password");
-                $usuario->password=bcrypt($password);
-                $r=$usuario->save();
-
-                if($r){
-                    return response()->json($usuario);
-                }
-                else
-                {
-                    return view("mensajes.msj_rechazado")->with("msj","Error al actualizar el password");
-                }
-        }
+    }
 }

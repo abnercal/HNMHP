@@ -19,7 +19,6 @@
     <div class="tab-content" id="contentsecundario">
         <div id="tab-1" class="tab-pane active">
             <div class="panel-body">
-
 				<div class="tab-pan active" id="contentsecundario">
 				    @if(isset($usuarios))
 
@@ -73,17 +72,15 @@
 				                                        </span></td>
 				                                        <td style="width: 5%">
 				                                            <button class="btn  btn-default btn-xs" onclick="verinfo_usuario({{$usu->id }})"><i class="fa fa-pencil"></i></button>
-				                                            <a href="" data-target="#modal-delete-{{$usu->id}}" data-toggle="modal" class="on-default" remove-row"><i class="fa fa-trash-o danger"></i></a>
+				                                            <a href="" data-target="#modal-delete-{{$usu->id}}" data-toggle="modal" class="on-default remove-row"><i class="fa fa-trash-o danger"></i></a>
 				                                        </td>                     
 				                                    </tr>
 				                                    @include('seguridad.usuario.modal')
 				                                @endforeach
-				                        </table>
-				                    </div>
-				                    {{$usuarios->render()}}
-				               </div>           
-				            
-
+				                    </table>
+				                {{$usuarios->render()}}
+				                </div>
+				            </div>           
 				        @else
 				            <br/><div class='rechazado'><label style='color:#FA206A'>...No se ha encontrado ningun usuario...</label>  </div> 
 				        @endif
@@ -94,8 +91,11 @@
 	</div>
 </div>
 
+
 @endsection
 
 @section('fin')
     @parent
+        <meta name="_token" content="{!! csrf_token() !!}" />
+
 @endsection

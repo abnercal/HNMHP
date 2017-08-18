@@ -6,8 +6,8 @@ $("#btnGuardarUsuario").click(function(e){
         }
     });
 
-
-    var miurl="store";
+    var urlraiz=$("#url_raiz_proyecto").val();
+    var miurl=urlraiz+"/seguridad/store";
 
     var formData = {
         name: $("#name").val(),
