@@ -166,9 +166,8 @@
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                autoclose: true,
-                format:"dd/mm/yyyy",
-                languaje:"es"
+                autoclose: true
+                
             });
 
             $('#date_modified').datepicker({
@@ -176,9 +175,7 @@
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                autoclose: true,
-                format:"dd/mm/yyyy",
-                languaje:"es"
+                autoclose: true
 
             });
 
