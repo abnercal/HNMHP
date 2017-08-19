@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::group(['prefix'=>'bienhechor'], function(){
 	Route::get('index','CBienhechor@index');
 	Route::post('add','CBienhechor@nuevobienhechor');
+	Route::get('listarupbienhe/{id}','CBienhechor@listarupbienhe');
+	Route::put('upbienhe/{id}','CBienhechor@upbienhe');
+	Route::get('listarbienhe/{id}','CBienhechor@listarbienhe');
 
 });
 

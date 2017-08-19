@@ -23,9 +23,26 @@ class CBienhechor extends Controller
  		->get();
 
  		$tipop=DB::table('tipopersona as tp')->where('tp.tipopersona','=','Bienhechor')->get();
- 		return view('bienechor.index',["bienhechor"=>$bienhechor,"tipop"=>$tipop]);
+        $donacion=DB::table('tipodonacion as td')->get();
+ 		return view('bienechor.index',["bienhechor"=>$bienhechor,"tipop"=>$tipop,"donacion"=>$donacion]);
     }
-
+    public function listarupbienhe(Request $request, $id)
+    {
+        $bienhechor=DB::table('persona as p')
+        ->join('tipopersona as tp','tp.idtipopersona','=','p.idtipopersona')
+        ->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo','p.permanente','p.nit')
+        ->orwhere('p.idpersona','=',$id)
+        ->first();
+        return response()->json($bienhechor);
+    }
+    public function listarbienhe(Request $request,$id)
+    {
+        $bienhechor=DB::table('persona as p')
+        ->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo')
+        ->where('p.idpersona','=',$id)
+        ->first();
+        return response()->json($bienhechor);
+    }
     public function nuevobienhechor(Request $request)
     {
     	//dd('prueba');
@@ -45,15 +62,33 @@ class CBienhechor extends Controller
         //dd($bienhe);
         return response()->json($bienhe);
     }
+
+    public function upbienhe(Request $request,$id)
+    {
+        $bienhe= Persona::findOrFail($id);
+        $bienhe-> nombre=$request->get('nombreb');
+        $bienhe-> apellido=$request->get('apellidob');
+        $bienhe-> direccion=$request->get('direccion');
+        $bienhe-> telefono=$request->get('telefono');
+        $bienhe-> idtipopersona=$request->get('tipopersona');
+        $bienhe-> nit=$request->get('nit');
+        $bienhe-> correo=$request->get('correo');
+        $bienhe-> idstatus='1';
+        $bienhe-> permanente=$request->get('tipobienhechor');
+        $bienhe->save();
+        return response()->json($bienhe);
+    }
+
     public function validabienhechor($request){
-            $rules=[
+        $rules=[
             'nombreb' => 'required',
             'telefono' => 'required',
+            'direccion' => 'required',
 
-            ];
-            $messages=[
+        ];
+        $messages=[
             'required' => 'Debe ingresar :attribute.',
-            ];
-            $this->validate($request, $rules,$messages);        
-        }
+        ];
+        $this->validate($request, $rules,$messages);        
+    }
 }
