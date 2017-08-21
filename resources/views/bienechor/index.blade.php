@@ -18,18 +18,18 @@
             <div><br></div>   
         </div>
 
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div><br></div>
-                    <div class="margin" id="botones_control">
-                        <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Bienhechor</button>
-                    </div>
-                    <div><br></div>
+                <div><br></div>
+                 <div class="margin" id="botones_control">
+                    <button class="btn btn-primary btn-addB" title="Nuevo Bienechor">Nuevo Bienhechor</button>
                 </div>
+                <div><br></div>
             </div>
+        </div>
 
-            <div class="row">
+            <div class="row" id="divcontenido">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-condensed table-hover "> 
@@ -81,42 +81,46 @@
 
                         <form role="form" id="formAgregar">
                             <div class="modal-header">
-
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Nombre</label>
-                                    <input id="nombreb" type="text" class="form-control" aria-describedby="basic-addon1">   
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Apellido</label>
-                                    <input id="apellidob" type="text" class="form-control" aria-describedby="basic-addon1">   
-                                </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Correo</label>
-                                    <input type="email" id="correo" maxlength="40" class="form-control">   
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label class="control-label">Nombre</label>
+                                        <input id="nombreb" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label class="control-label">Apellido</label>
+                                        <input id="apellidob" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                    </div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Teléfono</label>
-                                    <input id="telefono" type="text" class="form-control" maxlength="8" aria-describedby="basic-addon1" onkeypress="return valida(event);">   
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label class="control-label">Correo</label>
+                                            <input type="email" id="correo" maxlength="40" class="form-control"> 
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label class="control-label">Teléfono</label>
+                                        <input id="telefono" type="text" class="form-control" maxlength="8" aria-describedby="basic-addon1" onkeypress="return valida(event);">   
+                                    </div>
                                 </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label class="control-label">Nit</label>
-                                    <input id="nit" type="text" class="form-control" maxlength="9" aria-describedby="basic-addon1">   
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label class="control-label">Nit</label>
+                                        <input id="nit" type="text" class="form-control" maxlength="9" aria-describedby="basic-addon1">   
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                        <label class="control-label">Dirección</label>
+                                        <input type="text" id="direccion" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <label class="control-label">Dirección</label>
-                                    <input type="text" id="direccion" class="form-control">
-                                </div>
-                                
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
-                                    <div class="form-group">
-                                        <label>Tipo de bienhechor *</label>
-                                        <select name="tipobienhechor" id="tipobienhechor" class="form-control">
-                                            <option value="Permanente">Permanente</option>
-                                            <option value="Ocasional">Ocasional</option>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
+                                        <div class="form-group">
+                                            <label>Tipo de bienhechor *</label>
+                                            <select name="tipobienhechor" id="tipobienhechor" class="form-control">
+                                                <option value="Permanente">Permanente</option>
+                                                <option value="Ocasional">Ocasional</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="display: none;">    
@@ -225,10 +229,12 @@
 
 @section('fin')
 <meta name="_token" content="{!! csrf_token() !!}" />
+
 @parent
 <script src="{{asset('assets/js/bienhechor/bienhechor.js')}}"></script>
 <script src="{{asset('assets/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+
 <script>
     $(document).ready(function() {
         $('#fechadona').datepicker({
@@ -239,6 +245,15 @@
         autoclose: true
                 
         });
+
+        $("#formAgregar").validate({
+                 rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    }
+                 }
+             });
     });
 </script>
 @endsection
