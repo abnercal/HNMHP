@@ -62,9 +62,13 @@ class UController extends Controller
     public function add()
     {
         $usuario = user::all();
-        $persona = Persona::all();
+        $persona = Persona::all()->where('persona.idtipopersona','=','1');
 
         return view("seguridad.usuario.modalcreate",array('usuario'=>$usuario,'persona'=>$persona));
+        //return view('seguridad.usuario.modalcreate',['usuario'=>$usuario,'persona'=>$persona]);
+
+
+
     }
     public function store(Request $request)
     {

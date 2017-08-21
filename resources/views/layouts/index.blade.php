@@ -96,13 +96,11 @@
                     <li>
                         <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Usuario</span>  <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                                                    <li><a href="{{url('/seguridad/index')}}">Listado</a></li>
-
+                            <li><a href="{{url('/seguridad/index')}}">Listado</a></li>
                             <li><a href="javascript:void(0);" onclick="cargarmodalempleado(1);">Ingreso Usuario</a></li>
                         </ul>
                     </li>
                 </ul>
-
             </div>
         </nav>
 
@@ -125,9 +123,6 @@
                         <li>
                             <span class="m-r-sm text-muted welcome-message">Welcome to HNMHP.</span>
                         </li>
-                       
-
-
                         <li>
                             <a href="login.html">
                                 <i class="fa fa-sign-out"></i> Log out
@@ -146,7 +141,7 @@
             <div class="row">
                 <div class="wrapper wrapper-content">
                     @yield('contenido')
-                    @show
+                    
                 </div>
 
                 <div class="footer">
@@ -161,8 +156,7 @@
         </div>
     </div>
 
-    
-        @include('seguridad.usuario.create')
+    @include('seguridad.usuario.create')
     
 
     <input type="hidden"  id="url_raiz_proyecto" value="{{ url("/") }}" />

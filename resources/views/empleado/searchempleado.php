@@ -16,7 +16,9 @@
     </div>
 
     <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
-    <script type="text/javascript"> $(document).ready(function() {
+    <script type="text/javascript"> 
+var $ = jQuery;
+    $(document).ready(function() {
 
             $(".select2").select2();
 

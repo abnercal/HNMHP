@@ -45,7 +45,9 @@ Route::group(['prefix'=>'medicamento'], function(){
 // se agrega toda las rutas del empleado
 Route::group(['prefix'=>'empleado'], function(){
 	Route::get('index','EmpleadoController1@index');
+	//Route::get('add','EmpleadoController1@add');
 	Route::get('add','EmpleadoController1@add');
+
 	Route::post('store','EmpleadoController1@store');
 	Route::post('update','EmpleadoController1@edit');
 	Route::post('delete','EmpleadoController1@modal');
