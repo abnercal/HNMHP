@@ -4,6 +4,7 @@
     @parent
         <!-- <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> -->
         <link href="{{asset('assets/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" type="text/css" />
     @endsection
 
 @section ('contenido')
@@ -83,7 +84,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Nombre</label>
-                                    <input id="nombreb" name="Nombre" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                    <input id="nombreb" type="text" class="form-control" aria-describedby="basic-addon1">   
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Apellido</label>
@@ -97,7 +98,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Teléfono</label>
-                                    <input id="telefono" type="text" class="form-control" maxlength="8" aria-describedby="basic-addon1" onkeypress="return valida(event)">   
+                                    <input id="telefono" type="text" class="form-control" maxlength="8" aria-describedby="basic-addon1" onkeypress="return valida(event);">   
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -157,7 +158,7 @@
 
                                 <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Bienhechor</label>
-                                    <input id="nombre" type="text" class="form-control" aria-describedby="basic-addon1">   
+                                    <input id="nombreD" type="text" class="form-control" aria-describedby="basic-addon1" disabled="disabled">   
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Fecha del donativo</label>
@@ -170,7 +171,7 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">    
                                     <div class="form-group">
                                         <label>Tipo de donativo</label>
-                                        <select name="tipopersona" id="tipopersona" class="form-control">
+                                        <select id="tipodonativo" class="form-control">
                                             @foreach($donacion as $td)
                                                 <option value="{{$td->idtipodonacion}}">{{$td->donaciontipo}}</option>
                                             @endforeach
@@ -179,11 +180,11 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Cantidad</label>
-                                    <input id="nit" type="text" class="form-control" maxlength="9" aria-describedby="basic-addon1">   
+                                    <input id="cantidad" type="text" class="form-control" maxlength="9" aria-describedby="basic-addon1">   
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label class="control-label">Descripción</label>
-                                    <textarea class="form-control" placeholder="" id="observaciones" rows="3" maxlength="300"></textarea>
+                                    <textarea class="form-control" id="observaciones" rows="3" maxlength="300"></textarea>
                                 </div>
                             </div> 
                         </form>
@@ -191,7 +192,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" id="btnGuardarD">Guardar</button>
-                            <input type="hidden" id="idb" name="idb" value="0"/>
+                            <input type="hidden" id="idbi" name="idbi" value="0"/>
                         </div>
                     </div>
                 </div>
@@ -227,6 +228,7 @@
 @parent
 <script src="{{asset('assets/js/bienhechor/bienhechor.js')}}"></script>
 <script src="{{asset('assets/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 <script>
     $(document).ready(function() {
         $('#fechadona').datepicker({

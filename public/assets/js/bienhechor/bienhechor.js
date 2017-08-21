@@ -70,11 +70,41 @@
                             item += '<td><button class="btn  btn-success btn-md btnnd" title="Nuevo Donativo" value="'+data.idpersona+'"><i class="fa fa-heart"></i></button>';
                             item += '<button class="btn btn-primary btn-md btndb" title="Detalles" value="'+data.idpersona+'"><i class="glyphicon glyphicon-zoom-in"></i></button>';
                             item += '<button class="btn  btn-warning btn-md btneditb" title="Editar" value="'+data.idpersona+'"><i class="fa fa-pencil"></i></button>';
-                            item += '<button class="btn btn-danger btn-md btneliminarb" id="FWEF" value="'+data.idpersona+'" title="Eliminar" ><i class="fa fa-remove"></i></button></td></tr>';                        
-                        
+                            item += '<button class="btn btn-danger btn-md btneliminarb" id="FWEF" value="'+data.idpersona+'" title="Eliminar" ><i class="fa fa-remove"></i></button></td></tr>';
+
                         if (state == "addb")
                         {
                             $('#listbienhechor').append(item);
+                            swal({
+                            title: "¿Desea realizar una donación?",
+                            text: "Precione si para realizar una donación, no para cerrar este mensaje",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "¡Si!",
+                            cancelButtonText: "No",
+                            closeOnConfirm: true,
+                            closeOnCancel: false },
+
+                            function(isConfirm){
+                            if (isConfirm) 
+                            { 
+                                var idbi=data.idpersona;
+                                var miurl="listarbienhe";
+                                $.get(miurl+'/'+ idbi,function(data){
+                                    $('#idbi').val(data.idpersona);
+                                    $('#nombreD').val(data.nombre+' '+data.apellido);
+                                    $('#inputTitleD').html("Nuevo Donativo");
+                                    $('#formModalD').modal('show');
+                                });
+                            }
+
+                            else {
+                            swal("¡Hecho!",
+                            "Se ha guardado un nuevo Bienhechor",
+                            "success");
+                            }
+                            });
                         }
                         if (state == "up")
                         {
@@ -102,48 +132,93 @@
 /////Donación
     $(document).on('click','.btnnd',function(){
 
-        var idb=$(this).val();
+        var idbi=$(this).val();
         var miurl="listarbienhe";
-        $.get(miurl+'/'+ idb,function(data){
-            $('#idb').val(data.idpersona);
-            $('#nombre').val(data.nombre+' '+data.apellido);
+        $.get(miurl+'/'+ idbi,function(data){
+            $('#idbi').val(data.idpersona);
+            $('#nombreD').val(data.nombre+' '+data.apellido);
             $('#inputTitleD').html("Nuevo Donativo");
-            $('#formAgregarD').trigger("reset");
-            $('#btnGuardarD').val('addb');
             $('#formModalD').modal('show');
         });
     });
 
-//Validaciones Letras y numeros
-            function valida(e){
-                tecla = e.keyCode || e.which;
-                tecla_final = String.fromCharCode(tecla);
-                //Tecla de retroceso para borrar, siempre la permite
-                if (tecla==8 || tecla==37 || tecla==39 ||tecla==46 ||tecla==9)
-                    {
-                        return true;
-                    } 
-                // Patron de entrada, en este caso solo acepta numeros
-                patron =/[0-9]/;
-                //patron =/^\d{9}$/;
-                return patron.test(tecla_final);
+    $("#btnGuardarD").click(function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        var miurl="addonativo";
+        var type="POST";
+        var formData = {
+                fechadona:$("#fechadona").val(),
+                tipodonativo:$("#tipodonativo").val(),
+                cantidad:$("#cantidad").val(),
+                observaciones:$("#observaciones").val(),
+                idb:$('#idbi').val(),
+            };
 
-            }
-            //Se utiliza para que el campo de texto solo acepte letras
-            function validaL(e) {
-                key = e.keyCode || e.which;
-                tecla = String.fromCharCode(key).toString();
-                letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ63";//Se define todo el abecedario que se quiere que se muestre.
-                especiales = [8, 37, 39, 46, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
-                tecla_especial = false
-                for(var i in especiales) {
-                    if(key == especiales[i]) {
-                        tecla_especial = true;
-                        break;
+        $.ajax({
+            type: type,
+            url: miurl,
+            data: formData,
+            dataType: 'json',
+
+            success: function (data) {
+                swal({
+                    title: "Gracias!",
+                    text: "Se a guardado exitosamente el donativo!",
+                    type: "success"
+                });
+
+                $('#formModalD').modal('hide');        
+            },
+            error: function (data) {
+                $('#loading').modal('hide');
+                var errHTML="";
+                if((typeof data.responseJSON != 'undefined')){
+                    for( var er in data.responseJSON){
+                        errHTML+="<li>"+data.responseJSON[er]+"</li>";
                     }
+                }else{
+                    errHTML+='<li>Error al intentar guardar un nuevo registro, intente mas tarde.</li>';
                 }
-                if(letras.indexOf(tecla) == -1 && !tecla_especial){
-                    //alert('Tecla no aceptada');
-                    return false;
-                  }
+                $("#erroresContent").html(errHTML); 
+                $('#erroresModal').modal('show');
             }
+        });
+    });
+
+//Validaciones Letras y numeros
+    function valida(e){
+        tecla = e.keyCode || e.which;
+        tecla_final = String.fromCharCode(tecla);
+        //Tecla de retroceso para borrar, siempre la permite
+        if (tecla==8 || tecla==37 || tecla==39 ||tecla==46 ||tecla==9)
+            {
+                return true;
+            } 
+        // Patron de entrada, en este caso solo acepta numeros
+        patron =/[0-9]/;
+        //patron =/^\d{9}$/;
+        return patron.test(tecla_final);
+
+    }
+            //Se utiliza para que el campo de texto solo acepte letras
+    function validaL(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toString();
+        letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ63";//Se define todo el abecedario que se quiere que se muestre.
+        especiales = [8, 37, 39, 46, 9]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+        tecla_especial = false
+        for(var i in especiales) {
+            if(key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+        if(letras.indexOf(tecla) == -1 && !tecla_especial){
+            //alert('Tecla no aceptada');
+            return false;
+            }
+    }

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Persona;
+use App\Donacion;
 use Illuminate\Support\Collection;
 use DB;
 use Validator;
+use Carbon\Carbon;  // para poder usar la fecha y hora
+use Response;
 
 class CBienhechor extends Controller
 {
@@ -35,13 +38,13 @@ class CBienhechor extends Controller
         ->first();
         return response()->json($bienhechor);
     }
-    public function listarbienhe(Request $request,$id)
+    public function listarbienhe($id1)
     {
-        $bienhechor=DB::table('persona as p')
-        ->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo')
-        ->where('p.idpersona','=',$id)
+        $bienhechorT=DB::table('persona as p')
+        ->select('p.idpersona','p.nombre','p.apellido')
+        ->where('p.idpersona','=',$id1)
         ->first();
-        return response()->json($bienhechor);
+        return response()->json($bienhechorT);
     }
     public function nuevobienhechor(Request $request)
     {
@@ -79,11 +82,42 @@ class CBienhechor extends Controller
         return response()->json($bienhe);
     }
 
+    public function addonativos(Request $request)
+    {
+        $this->validadonativo($request);
+        $mytime = Carbon::now('America/Guatemala');
+        $fechadon=$request->get('fechadona');
+        $fechadona=Carbon::createFromFormat('d/m/Y',$fechadon);
+        $fecha=$fechadona->format('Y-m-d');
+
+        $donar= new Donacion;
+        $donar-> fechaingreso=$mytime->toDateTimeString();
+        $donar-> fechadonacion=$fecha;
+        $donar-> monto=$request->get('cantidad');
+        $donar-> idpersona=$request->get('idb');
+        $donar-> idtipodonacion=$request->get('tipodonativo');
+        $donar-> descripcion=$request->get('observaciones');
+        $donar->save();
+        return response()->json($donar);
+    }
+
     public function validabienhechor($request){
         $rules=[
             'nombreb' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
+
+        ];
+        $messages=[
+            'required' => 'Debe ingresar :attribute.',
+        ];
+        $this->validate($request, $rules,$messages);        
+    }
+    public function validadonativo($request){
+        $rules=[
+            'cantidad' => 'required',
+            'fechadona' => 'required',
+            'observaciones' => 'required',
 
         ];
         $messages=[
