@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends ('layouts.index')
 
 @section('estilos')
@@ -86,3 +87,6 @@
     });
 </script>
 @endsection
+=======
+detalles.blade.php
+>>>>>>> 629df6bfff6bef58291ccaadb59468b961710748

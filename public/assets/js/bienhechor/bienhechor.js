@@ -8,9 +8,13 @@
 
             $(document).on('click','.btndb',function(){
                 var idb=$(this).val();
+<<<<<<< HEAD
 
                 var miurl="listardetallesb/"+idb;
                 //alert(idb);
+=======
+                var miurl="listardetallesb/"+idb;
+>>>>>>> 629df6bfff6bef58291ccaadb59468b961710748
             });
 
             $(document).on('click','.btneditb',function(){
