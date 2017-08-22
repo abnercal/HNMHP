@@ -6,16 +6,7 @@
                 $('#formModal').modal('show');
             });
 
-            $(document).on('click','.btndb',function(){
-                var idb=$(this).val();
-<<<<<<< HEAD
-
-                var miurl="listardetallesb/"+idb;
-                //alert(idb);
-=======
-                var miurl="listardetallesb/"+idb;
->>>>>>> 629df6bfff6bef58291ccaadb59468b961710748
-            });
+            
 
             $(document).on('click','.btneditb',function(){
                 var idb=$(this).val();
@@ -79,17 +70,17 @@
                             item += '<td>'+data.idpersona+'</td>';
                             item += '<td>'+data.nombre+' '+data.apellido+'</td>'+'<td>' +data.direccion+ '</td>'+'<td>'+data.telefono+'</td>'+'<td>'+data.correo+'</td>';
                             item += '<td><button class="btn  btn-success btn-md btnnd" title="Nuevo Donativo" value="'+data.idpersona+'"><i class="fa fa-heart"></i></button>';
-                            item += '<button class="btn btn-primary btn-md btndb" title="Detalles" value="'+data.idpersona+'"><i class="glyphicon glyphicon-zoom-in"></i></button>';
+                            item += '<button class="btn btn-primary btn-md btndb" value="'+data.idpersona+'" title="Detalles"><i class="glyphicon glyphicon-zoom-in"></i></button>';
                             item += '<button class="btn  btn-warning btn-md btneditb" title="Editar" value="'+data.idpersona+'"><i class="fa fa-pencil"></i></button>';
                             item += '<button class="btn btn-danger btn-md btneliminarb" id="FWEF" value="'+data.idpersona+'" title="Eliminar" ><i class="fa fa-remove"></i></button></td></tr>';
-
+                            //<a c>
                         if (state == "addb")
                         {
                             $('#listbienhechor').append(item);
                             swal({
                             title: "¿Desea realizar una donación?",
                             text: "Precione si para realizar una donación, no para cerrar este mensaje",
-                            type: "warning",
+                            type: "question",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "¡Si!",
@@ -143,6 +134,39 @@
                 });
             });
 
+
+/*
+swal({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  confirmButtonClass: 'btn btn-success',
+  cancelButtonClass: 'btn btn-danger',
+  buttonsStyling: false
+}).then(function () {
+  swal(
+    'Deleted!',
+    'Your file has been deleted.',
+    'success'
+  )
+}, function (dismiss) {
+  // dismiss can be 'cancel', 'overlay',
+  // 'close', and 'timer'
+  if (dismiss === 'cancel') {
+    swal(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+
+*/
 /////Donación
     $(document).on('click','.btnnd',function(){
 
@@ -206,7 +230,13 @@
             }
         });
     });
+//Detalles de bienhechor
 
+    $(document).on('click','.btndb',function(){
+        var idbi=$(this).val();
+        location.href="listardetallesb/"+idbi;
+
+    });
 //Validaciones Letras y numeros
     function valida(e){
         tecla = e.keyCode || e.which;
