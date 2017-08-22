@@ -6,6 +6,13 @@
                 $('#formModal').modal('show');
             });
 
+            $(document).on('click','.btndb',function(){
+                var idb=$(this).val();
+
+                var miurl="listardetallesb/"+idb;
+                //alert(idb);
+            });
+
             $(document).on('click','.btneditb',function(){
                 var idb=$(this).val();
                 var miurl="listarupbienhe";
@@ -108,6 +115,9 @@
                         }
                         if (state == "up")
                         {
+                            swal("¡Hecho!",
+                            "Se actualizaron correctamente los datos del Bienhechor",
+                            "success");
                             $("#bien"+idb).replaceWith(item);
                         }
                         $('#formModal').modal('hide');
@@ -131,6 +141,10 @@
 
 /////Donación
     $(document).on('click','.btnnd',function(){
+
+        $("#fechadona").val("");
+        $("#cantidad").val("");
+        $("#observaciones").val("");
 
         var idbi=$(this).val();
         var miurl="listarbienhe";

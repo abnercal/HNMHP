@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//https://gist.github.com/KefDS/5c6e6db367ba69d96dfc
 Route::get('/', function () {
     return view('layouts.index');
  });
@@ -24,6 +24,8 @@ Route::group(['prefix'=>'bienhechor'], function(){
 	Route::put('upbienhe/{id}','CBienhechor@upbienhe');
 	Route::get('listarbienhe/{id1}','CBienhechor@listarbienhe');
 	Route::post('addonativo','CBienhechor@addonativos');
+	Route::get('listardetallesb/{id}','CBienhechor@detallesb');
+	//
 });
 
 // se agrega todas las rutas del paciente, examen medico, historial entre otros

@@ -29,6 +29,24 @@ class CBienhechor extends Controller
         $donacion=DB::table('tipodonacion as td')->get();
  		return view('bienechor.index',["bienhechor"=>$bienhechor,"tipop"=>$tipop,"donacion"=>$donacion]);
     }
+    public function detallesb(Request $request,$id)
+    {
+        $bienhechor=DB::table('persona as p')
+        ->join('tipopersona as tp','tp.idtipopersona','=','p.idtipopersona')
+        ->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo','p.permanente','p.nit')
+        ->orwhere('p.idpersona','=',$id)
+        ->first();
+
+        $donaciones=DB::table('donacion as d')
+        ->join('persona as p','p.idpersona','=','d.idpersona')
+        ->join('tipodonacion as td','td.idtipodonacion','=','d.idtipodonacion')
+        ->select('d.idbienhechor','td.donaciontipo','d.monto','d.fechadonacion','d.descripcion')
+        ->where('p.idpersona','=',$id)
+        ->get();
+
+        return view('bienechor.detalles',["bienhechor"=>$bienhechor,"donaciones"=>$donaciones]);
+
+    }
     public function listarupbienhe(Request $request, $id)
     {
         $bienhechor=DB::table('persona as p')

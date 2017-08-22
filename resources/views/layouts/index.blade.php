@@ -1207,6 +1207,9 @@ nav.navbar {
     <script src="{{asset('assets/js/empleado/modal.js')}}"></script>
     <script src="{{asset('assets/js/empleado/usuario.js')}}"></script>
 
+
+    <script src="{{asset('assets/js/plugins/validate/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/validate/jquery.validate.js')}}"></script>
     
 
 
