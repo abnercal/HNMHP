@@ -23,7 +23,7 @@ class CBienhechor extends Controller
     	->select('p.idpersona','p.nombre','p.apellido','p.telefono','p.direccion','p.correo','sts.nombre as snombre')
  		//->where('sts.nombre','=','Activo')
  		->where('tp.idtipopersona','=',2)
- 		->get();
+ 		->paginate(15);
 
  		$tipop=DB::table('tipopersona as tp')->where('tp.tipopersona','=','Bienhechor')->get();
         $donacion=DB::table('tipodonacion as td')->get();

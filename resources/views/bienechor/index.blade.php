@@ -60,6 +60,7 @@
                             </tbody>
                         </table>
                     </div>
+                {{$bienhechor->render()}}
                </div>           
             </div>
 
