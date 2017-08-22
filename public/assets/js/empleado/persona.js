@@ -53,9 +53,11 @@ function agregar(){
         var item  = '<tr class="even gradeA" id="tipoantecedente'+cont+'">';
             item +='<td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td>';
             item += '<td><input type="hidden" name="idtipoantecedente[]" value="'+idtipoantecedente+'">'+tipoantecedente+'</td>';
-            item += '<td><input type="hidden" name="idtipoantecedente[]" value="'+fechavencimiento+'">'+fechavencimiento+'</td><tr>';
+            item += '<td>'+fechavencimiento+'</td><tr>';
+            cont++;
 
-        $('#detalleA').append(item);
+        $('#detalles').append(item);
+        evaluar();
     }
 
     $(document).ready(function() {
@@ -78,19 +80,102 @@ function agregar(){
        cont--;
        evaluar();
    }
-
-
+ 
     $(document).on('click','.btn-btnGuardarEmpleado',function(e){
         var itemsData=[];
-        var result = [];
-        alert('prue');
+        var miurl = "store";
+        var urlraiz=$("#url_raiz_proyecto").val();
 
-        $('#detalleA tr').each(function(){
-            var notificar = $(this).find('td').eq(1).html();
-            var mensaje = $(this).find('td').eq(2).html();
-
-            valor = new Array(notificar,mensaje);
+        $('#detalles tr').each(function(){
+            var id = $(this).closest('tr').find('input[type="hidden"]').val();
+            var expiration_date = $(this).find('td').eq(2).html();
+            valor = new Array(id,expiration_date);
             itemsData.push(valor);
+            
+        });
+        
+        var formData = {
+            nombre: $('#nombre').val(),
+            apellido: $('#apellido').val(),
+            direccion: $('#direccion').val(),
+            telefono: $('#telefono').val(),
+            estadocivil: $('#estadocivil').val(),
+            dpi: $('#dpi').val(),
+            nit: $('#nit').val(),
+            correo: $('#correo').val(),
+            fecha_nacimiento: $('#birth_date').val(),
+            idtipopersona: $('#idtipopersona').val(),
+            fecha_inicio: $('#date_work_start').val(),
+            salario: $('#salario').val(),
+            idpuesto: $('#idpuesto').val(),
+
+            items: itemsData,};
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: miurl,
+            data: formData,
+            dataType: 'json',
+            
+            success: function (data) {
+                /*
+                swal({
+                    title:"Envio correcto",
+                    text: "Gracias",
+                    type: "success"
+                },
+                function(){
+                    window.location.href="/empleado/listado"
+                });*/
+
+                swal({
+                    title: "¿Ingresar nuevo usuario?",
+                    text: "nuevo registro de un usuario",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si",
+                    closeOnConfirm: true,
+                    closeOnCancel:false
+                },function () {
+
+                    var miurl=urlraiz+"/seguridad/add";
+                    var errHTML="";
+                    $.ajax({
+                        url: miurl
+                    }).done( function(resul) 
+                    {
+                        $("#lisadoEmp").html(resul);
+                        $("#idempleado").append(resul);
+
+                        $('#inputTitleUsuario').html("Nuevo ingreo de usuario");
+                        $('#formAgregarUsuario').html(resul);
+                        $('#formModalUsuario').modal('show');
+
+                    }).fail(function() 
+                    {
+                        $("#lisadoEmp").html('<span>...Ha ocurrido un error, revise su conexión y vuelva a intentarlo...</span>');
+                    });
+                });                
+            },
+            error: function (data) {
+                var errHTML="";
+                if((typeof data.responseJSON != 'undefined')){
+                    for( var er in data.responseJSON){
+                        errHTML+="<li>"+data.responseJSON[er]+"</li>";
+                    }
+                    }else{
+                        errHTML+='<li>Error al borrar el &aacute;rea de atenci&oacute;n.</li>';
+                    }
+                $("#erroresContentEmpleado").html(errHTML); 
+                $('#erroresModalEmpleado').modal('show');
+            },
         });
     });
 

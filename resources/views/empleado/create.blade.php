@@ -6,6 +6,10 @@
 
     <link href="{{asset('assets/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/plugins/footable/footable.core.css')}}" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <link href="{{asset('assets/css/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet">
+
     <!-- <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> -->
     @endsection
 
@@ -23,33 +27,33 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                            <div class="form-group">
                                 <label for="Nombre">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" placeholder="..">
+                                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="..">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="nombre">Apellido</label>
-                                <input type="text" name="apellido" class="form-control" placeholder="...">
+                                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="...">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="stock">Direccion</label>
-                                <input type="text" name="direccion"  class="form-control" placeholder="...">
+                                <input type="text" name="direccion"  id="direccion" class="form-control" placeholder="...">
                             </div>
                         </div>
                         
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">Telefono</label>
-                                <input type="text" name="telefono"  class="form-control" placeholder="...">
+                                <input type="text" name="telefono"  id="telefono" class="form-control" placeholder="...">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">Estado civil</label>
-                                <select name="idpersona" id="idpersona" class="form-control select2" data-live-search="true">
+                                <select name="estadocivil" id="estadocivil" class="form-control select2" data-live-search="true">
                                     <option value="Soltero">Soltero</option>
                                     <option value="casado">Casado</option>
                                 </select>
@@ -59,21 +63,21 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">DPI</label>
-                                <input type="text" name="telefono"  class="form-control" placeholder="...">
+                                <input type="text" name="dpi" id="dpi" class="form-control" placeholder="...">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">Nit</label>
-                                <input type="text" name="telefono"  class="form-control" placeholder="...">
+                                <input type="text" name="nit"  id="nit" class="form-control" placeholder="...">
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">Correo electronico</label>
-                                <input type="email" name="telefono"  class="form-control" placeholder="...">
+                                <input type="email" name="correo" id="correo" class="form-control" placeholder="...">
                             </div>
                         </div>
 
@@ -102,7 +106,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <div class="form-group">
                                 <label for="descripcion">Salario</label>
-                                <input type="number" name="telefono"  class="form-control" placeholder="..." value="0">
+                                <input type="number" name="salario" id="salario" class="form-control" placeholder="..." value="0">
                             </div>
                         </div>
 
@@ -160,7 +164,7 @@
                         </div>
 
                         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                            <table id="detalleA" class="table table-striped table-bordered table-condensed table-hover">
+                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
                                 <thead style="background-color:#A9D0F5">
                                     <tr>
                                         <th>Opciones</th>
@@ -168,7 +172,12 @@
                                         <th>Fecha Vencimiento</th>
                                     </tr>
                                 </thead>
-                               <tr></tr>
+                                <tfoot>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tfoot>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -195,6 +204,32 @@
     </div>
 </div>       
 
+<!-- Modal for displaying the messages -->
+<div class="modal fade" id="erroresModalEmpleado" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Errores</h4>
+            </div>
+
+            <div class="modal-body">
+                <!-- The messages container -->
+<!--                <div id="erroresContent"></div>-->
+                   <ul style="list-style-type:circle" id="erroresContentEmpleado"></ul>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('seguridad.usuario.create')
+
 @endsection
 
 @section('fin')
@@ -205,6 +240,8 @@
     <script src="{{asset('assets/js/plugins/footable/footable.all.min.js')}}"></script>
     <script src="{{asset('assets/js/empleado/persona.js')}}"></script>
 
+    <!-- Sweet alert -->
+    <script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {
