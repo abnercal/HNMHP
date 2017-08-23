@@ -1,28 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Bienvenido al sistema Hermano Pedro</h2>
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+
+                    <form class="m-t" method="POST" action="{{ url('/login') }}">
+                                    {{ csrf_field() }}
+
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                            <input type="email" class="form-control" placeholder="Correo" value="{{ old('email') }}" required autofocus name="email">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                            <i class="md md-markunread form-control-feedback l-h-34"></i>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Contraseña" name="password" required="">
+                                                        @if ($errors->has('password'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        <i class="md md-vpn-key form-control-feedback l-h-34"></i>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Ingresar</button>
+
+                        <a href="#">
+                            <small>¿Olvidaste tu contraseña?</small>
+                        </a>
+                        <!--
+                        <p class="text-muted text-center">
+                            <small>Do not have an account?</small>
+                        </p>
+                        <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                        -->
+                    </form>
+
+<!--
+
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
@@ -54,15 +82,31 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                        <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Olvidaste tu contraseña?
                                 </a>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
+                    <!--
+                    <p class="m-t">
+                        <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+                    </p>
+                    -->
                 </div>
             </div>
         </div>
+        <hr/>
+        <!--
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Example Company
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2014-2015</small>
+            </div>
+        </div>
+        -->
     </div>
-</div>
+
+
 @endsection

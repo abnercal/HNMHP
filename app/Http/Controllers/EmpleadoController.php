@@ -34,4 +34,9 @@ class EmpleadoController extends Controller
     {
         return view('empleado.index');
     }
+
+    public function add(Request $request)
+    {
+        return view('empleado.create');
+    }
 }

@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//https://gist.github.com/KefDS/5c6e6db367ba69d96dfc
-Route::get('/', function () {
-    return view('layouts.index');
- });
+Auth::routes();
+Route::get('/{slug?}','HomeController@index');
 
+Route::get('/', function () {
+    return view('auth/login');
+});
+
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/home', 'HomeController@index');
 
 // se agrega todas las rutas del bienechor, donaciones entre otros
 Route::group(['prefix'=>'bienhechor'], function(){
@@ -51,7 +55,9 @@ Route::group(['prefix'=>'medicamento'], function(){
 // se agrega toda las rutas del empleado
 Route::group(['prefix'=>'empleado'], function(){
 	Route::get('index','EmpleadoController1@index');
+	//Route::get('add','EmpleadoController1@add');
 	Route::get('add','EmpleadoController1@add');
+
 	Route::post('store','EmpleadoController1@store');
 	Route::post('update','EmpleadoController1@edit');
 	Route::post('delete','EmpleadoController1@modal');
@@ -59,9 +65,11 @@ Route::group(['prefix'=>'empleado'], function(){
 
 
 Route::group(['prefix'=>'seguridad'], function(){
+
 	Route::get('index','UController@index');
 	Route::get('add','UController@add');
 	Route::post('store','UController@store');
+	Route::get('editar_usuario/{id}', 'UController@editar_usuario');
 });
 
 
