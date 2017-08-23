@@ -75,8 +75,6 @@
                 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <input type="hidden" name="idemple" id="idemple">
-                            <input type="hidden" name="identifica" id="identifica">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title" id="inputTitle"></h4>

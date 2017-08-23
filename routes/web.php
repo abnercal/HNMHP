@@ -25,6 +25,10 @@ Route::group(['prefix'=>'bienhechor'], function(){
 	Route::get('listarbienhe/{id1}','CBienhechor@listarbienhe');
 	Route::post('addonativo','CBienhechor@addonativos');
 	Route::get('listardetallesb/{id}','CBienhechor@detallesb');
+	Route::get('listardetallesb/listarbienhe/{id1}','CBienhechor@listarbienhe');
+	Route::get('listardetallesb/listarupdonativo/{id}','CBienhechor@listarupdonativo');
+	Route::post('listardetallesb/addonativo','CBienhechor@addonativos');
+	Route::put('listardetallesb/updonativo/{id}','CBienhechor@updonativo');
 	//
 });
 

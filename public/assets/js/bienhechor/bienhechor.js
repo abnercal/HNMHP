@@ -78,19 +78,18 @@
                         {
                             $('#listbienhechor').append(item);
                             swal({
-                            title: "¿Desea realizar una donación?",
-                            text: "Precione si para realizar una donación, no para cerrar este mensaje",
-                            type: "question",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "¡Si!",
-                            cancelButtonText: "No",
-                            closeOnConfirm: true,
-                            closeOnCancel: false },
-
-                            function(isConfirm){
-                            if (isConfirm) 
-                            { 
+                              title: '¿Desea realizar una donación?',
+                              text: "Precione si para realizar una donación, no para cerrar este mensaje.",
+                              type: 'question',
+                              showCancelButton: true,
+                              confirmButtonColor: '#3085d6',
+                              cancelButtonColor: '#d33',
+                              confirmButtonText: 'Si!',
+                              cancelButtonText: 'No!',
+                              confirmButtonClass: 'btn btn-success',
+                              cancelButtonClass: 'btn btn-danger',
+                              buttonsStyling: false
+                            }).then(function () {
                                 var idbi=data.idpersona;
                                 var miurl="listarbienhe";
                                 $.get(miurl+'/'+ idbi,function(data){
@@ -99,13 +98,16 @@
                                     $('#inputTitleD').html("Nuevo Donativo");
                                     $('#formModalD').modal('show');
                                 });
-                            }
-
-                            else {
-                            swal("¡Hecho!",
-                            "Se ha guardado un nuevo Bienhechor",
-                            "success");
-                            }
+                            }, function (dismiss) {
+                              // dismiss can be 'cancel', 'overlay',
+                              // 'close', and 'timer'
+                              if (dismiss === 'cancel') {
+                                swal(
+                                  '¡Hecho!',
+                                  'Se ha guardado un nuevo Bienhechor :)',
+                                  'success'
+                                )
+                              }
                             });
                         }
                         if (state == "up")
@@ -135,38 +137,7 @@
             });
 
 
-/*
-swal({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  type: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!',
-  cancelButtonText: 'No, cancel!',
-  confirmButtonClass: 'btn btn-success',
-  cancelButtonClass: 'btn btn-danger',
-  buttonsStyling: false
-}).then(function () {
-  swal(
-    'Deleted!',
-    'Your file has been deleted.',
-    'success'
-  )
-}, function (dismiss) {
-  // dismiss can be 'cancel', 'overlay',
-  // 'close', and 'timer'
-  if (dismiss === 'cancel') {
-    swal(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-    )
-  }
-})
 
-*/
 /////Donación
     $(document).on('click','.btnnd',function(){
 

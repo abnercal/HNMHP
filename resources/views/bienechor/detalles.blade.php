@@ -21,6 +21,15 @@
 	        <h4>Tipo de Bienhechor:&nbsp;&nbsp;&nbsp;{{$bienhechor->permanente}}</h4>
 	    </div>
 	</div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div><br></div>
+                <div class="margin" id="botones_control">
+                    <button class="btn btn-primary btn-addDB" value="{{$bienhechor->idpersona}}" title="Nuevo Bienechor">Nueva Donación</button>
+                </div>
+            <div><br></div>
+        </div>
+    </div>
 	<div class="row"><br><br>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         	<div class="table-responsive">
@@ -33,17 +42,17 @@
                         <th style="width: 35%">Descripción</th>
                         <th style="width: 15%">Opciones</th>
                     </thead>
-                    <tbody id="listbienhechor">
+                    <tbody id="donativos">
                         @foreach ($donaciones as $don)
-                            <tr class="even gradeA">
+                            <tr class="even gradeA" id="donativo{{$don->idbienhechor}}">
                                 <td>{{$don->idbienhechor}}</td>
                                 <td>{{$don->donaciontipo}}</td>
                                 <td>{{$don->monto}}</td>
                                 <td>{{$don->fechadonacion}}</td>
                                 <td>{{$don->descripcion}}</td>
                                 <td>
-                                    <button class="btn  btn-warning btn-md btneditb" title="Editar"><i class="fa fa-pencil"></i></button>
-                                    <button class="btn btn-danger btn-md btneliminarb" title="Eliminar" ><i class="fa fa-remove"></i></button> 	
+                                    <button class="btn  btn-warning btn-md btneditdb" value="{{$don->idbienhechor}}" title="Editar"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-md btneliminardb" value="{{$don->idbienhechor}}" title="Eliminar" ><i class="fa fa-remove"></i></button> 	
                                 </td>
                             </tr>
                         @endforeach
@@ -60,8 +69,6 @@
     <div class="modal fade" id="formModalD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <input type="hidden" name="idemple" id="idemple">
-                            <input type="hidden" name="identifica" id="identifica">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title" id="inputTitleD"></h4>
@@ -69,7 +76,7 @@
 
                         <form role="form" id="formAgregarD">
                             <div class="modal-header">
-
+                            <input id="iddona" type="hidden" class="form-control" maxlength="9" aria-describedby="basic-addon1"> 
                                 <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                     <label class="control-label">Bienhechor</label>
                                     <input id="nombreD" type="text" class="form-control" aria-describedby="basic-addon1" disabled="disabled">   
@@ -141,7 +148,7 @@
 <meta name="_token" content="{!! csrf_token() !!}" />
 
 @parent
-<script src="{{asset('assets/js/bienhechor/bienhechor.js')}}"></script>
+<script src="{{asset('assets/js/bienhechor/donacion.js')}}"></script>
 <script src="{{asset('assets/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('assets/js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 

@@ -44,7 +44,9 @@ class CBienhechor extends Controller
         ->where('p.idpersona','=',$id)
         ->get();
 
-        return view('bienechor.detalles',["bienhechor"=>$bienhechor,"donaciones"=>$donaciones]);
+        $donacion=DB::table('tipodonacion as td')->get();
+
+        return view('bienechor.detalles',["bienhechor"=>$bienhechor,"donaciones"=>$donaciones,"donacion"=>$donacion]);
 
     }
     public function listarupbienhe(Request $request, $id)
@@ -55,6 +57,19 @@ class CBienhechor extends Controller
         ->orwhere('p.idpersona','=',$id)
         ->first();
         return response()->json($bienhechor);
+    }
+
+    public function listarupdonativo(Request $request, $id)
+    {
+        $donativo=DB::table('donacion as d')
+        ->join('tipodonacion as td','td.idtipodonacion','=','d.idtipodonacion')
+        ->join('persona as p','p.idpersona','=','d.idpersona')
+        ->select('d.idbienhechor',(DB::raw('DATE_FORMAT(d.fechadonacion,"%d/%m/%Y") as fechadonacion')),'d.monto','d.descripcion','td.donaciontipo','p.nombre','p.apellido')
+        ->where('d.idbienhechor','=',$id)
+        ->first();
+
+        //(DB::raw('DATE_FORMAT(d.fechadonacion,"%d/%m/%Y") as fechadonacion'))
+        return response()->json($donativo);
     }
     public function listarbienhe($id1)
     {
@@ -113,6 +128,23 @@ class CBienhechor extends Controller
         $donar-> fechadonacion=$fecha;
         $donar-> monto=$request->get('cantidad');
         $donar-> idpersona=$request->get('idb');
+        $donar-> idtipodonacion=$request->get('tipodonativo');
+        $donar-> descripcion=$request->get('observaciones');
+        $donar->save();
+        return response()->json($donar);
+    }
+
+    public function updonativo(Request $request,$id)
+    {
+        $this->validadonativo($request);
+        $mytime = Carbon::now('America/Guatemala');
+        $fechadon=$request->get('fechadona');
+        $fechadona=Carbon::createFromFormat('d/m/Y',$fechadon);
+        $fecha=$fechadona->format('Y-m-d');
+        $donar= Donacion::findOrFail($id);
+        $donar-> fechaingreso=$mytime->toDateTimeString();
+        $donar-> fechadonacion=$fecha;
+        $donar-> monto=$request->get('cantidad');
         $donar-> idtipodonacion=$request->get('tipodonativo');
         $donar-> descripcion=$request->get('observaciones');
         $donar->save();
