@@ -49,7 +49,7 @@
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Perfil</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="{{ url('/logout') }}">Cerrar Sesion</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -121,11 +121,11 @@
                     <!-- COLOCAR COLOR AL NAV -->
                     <ul class="nav navbar-top-links navbar-right ">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Welcome to HNMHP.</span>
+                            <span class="m-r-sm text-muted welcome-message">Bienvenido a HNMHP.</span>
                         </li>
                         <li>
-                            <a href="login.html">
-                                <i class="fa fa-sign-out"></i> Log out
+                            <a href="{{ url('/logout') }}">
+                                <i class="fa fa-sign-out"></i> Cerrar Sesion
                             </a>
                         </li>
                         <li>
@@ -146,10 +146,10 @@
 
                 <div class="footer">
                     <div class="pull-right">
-                            10GB of <strong>250GB</strong> Free.
+                        <strong>AC.LL.LR.CR.</strong>
                     </div>
                     <div>
-                        <strong>Copyright</strong> Example Company &copy; 2014-2017
+                        <strong>Copyright</strong> Grupo # 12 &copy; Control y Gestión Hermano Pedro
                     </div>
                 </div>
             </div>

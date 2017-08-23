@@ -20,7 +20,8 @@ class EmpleadoController1 extends Controller
 {
     public function index(Request $request)
     {
-        return view('empleado.indexempleado');
+        $empleado = Persona::all()->where('idtipopersona','=','1');
+        return view('empleado.index',["empleado"=>$empleado]);
     }
 
     public function add(Request $request)

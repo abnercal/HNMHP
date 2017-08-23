@@ -1,17 +1,10 @@
-@extends('layouts.app')
+@extends ('layouts.index')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+@section('estilos')
+    @parent
+        <link href="{{asset('assets/plugins/select2/select2.css')}}" rel="stylesheet" /> 
+    @endsection
 
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section ('contenido')
 @endsection
+

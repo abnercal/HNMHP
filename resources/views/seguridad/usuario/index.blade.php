@@ -15,7 +15,7 @@
                 <span class="hidden-xs">Listado de usuarios</span>
             </a>
         </li>
-    </ul>
+    </ul> 
     <div class="tab-content" id="contentsecundario">
         <div id="tab-1" class="tab-pane active">
             <div class="panel-body">
@@ -93,7 +93,5 @@
 
 @section('fin')
     @parent
-
-
 
 @endsection

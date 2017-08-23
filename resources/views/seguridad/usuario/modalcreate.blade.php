@@ -13,7 +13,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <div><br></div>
+                            
                             <label for="email" class="col-md-4 control-label">E-Mail</label>
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required />
@@ -26,8 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div><br><br></div>
-
+                            
                             <label for="password" class="col-md-4 control-label">Contraseña</label>
 
                             <div class="col-md-6">
@@ -41,7 +40,7 @@
                         </div>
 
                         <div class="form-group">
-                        <div><br></div>
+                        
 
                             <label class="col-md-4 control-label">Empleado</label>
                             <div class="col-md-6">
@@ -54,5 +53,70 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="tipo">Rol a asignar*</label>
+                                <div class="col-sm-6" >         
+                                    <select id="idrol" name="idrol" class="form-control">
+                                        @if (isset($role))
+                                        @foreach($role as $rol)
+                                            <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>    
+                                </div>
+
+                                <div class="navbar-form navbar-right pull-rigth">
+                                    <button type="button" id="bt_addrol" class="btn btn-xs btn-info">Asignar rol</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div><br><br><br><br><br><br><br><br><br></div>
+                        <div class="form-group">
+                        <br>
+                            <div class="col-sm-10">
+                                <table id="rolUsuario" class="table table-bordered">
+
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%">Opciones</th>
+                                            <th>Rol</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <th></th>
+                                        <th></th>
+                                    </tfoot>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
                     </form>
 
+                    <script type="text/javascript">
+                        var cont = 0;
+
+function agregar(){
+
+        idrol =$("#idrol option:selected").val(); 
+        rol =$("#idrol option:selected").text();
+
+        var item  = '<tr class="even gradeA" id="rol'+cont+'">';
+            item +='<td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td>';
+            item += '<td><input type="hidden" name="idrol[]" value="'+idrol+'">'+rol+'</td>';
+
+        $('#rolUsuario').append(item);
+    }
+
+    $(document).ready(function() {
+        $('#bt_addrol').click(function() {
+            agregar();
+        });
+    });
+
+    function eliminar(index){
+       $("#rol" + index).remove();
+       cont--;
+   }
+                    </script>

@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+Route::get('/{slug?}','HomeController@index');
 
 Route::get('/', function () {
-    return view('layouts.index');
- });
+    return view('auth/login');
+});
 
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/home', 'HomeController@index');
 
 // se agrega todas las rutas del bienechor, donaciones entre otros
 Route::group(['prefix'=>'bienhechor'], function(){
@@ -55,9 +59,11 @@ Route::group(['prefix'=>'empleado'], function(){
 
 
 Route::group(['prefix'=>'seguridad'], function(){
+
 	Route::get('index','UController@index');
 	Route::get('add','UController@add');
 	Route::post('store','UController@store');
+	Route::get('editar_usuario/{id}', 'UController@editar_usuario');
 });
 
 

@@ -62,23 +62,44 @@ class UController extends Controller
     public function add()
     {
         $usuario = user::all();
+        $role=Role::all();
         $persona = DB::table('persona as per')->select('per.nombre','per.apellido','per.idpersona')->where('per.idtipopersona','=',1)->get();
 
-        return view("seguridad.usuario.modalcreate",array('usuario'=>$usuario,'persona'=>$persona));
+        return view("seguridad.usuario.modalcreate",array('usuario'=>$usuario,'persona'=>$persona,'role'=>$role));
         //return view('seguridad.usuario.modalcreate',['usuario'=>$usuario,'persona'=>$persona]);
 
 
 
     }
+     
+
     public function store(Request $request)
     {
-        $usuario=new User;
-        $usuario->name=$request->get('name');
-        $usuario->email=$request->get('email');
-        $usuario->password=bcrypt($request->get('password'));
-        $usuario->idpersona=$request->get('idpersona');
-        $usuario->save();
+        $miArray = $request->items;
+        try {
+            DB::beginTransaction();
 
+            $usuario=new User;
+            $usuario->name=$request->get('name');
+            $usuario->email=$request->get('email');
+            $usuario->password=bcrypt($request->get('password'));
+            $usuario->idpersona=$request->get('idpersona');
+            $usuario->save();
+
+            if(count($miArray)>0)
+            {
+                $usuariorol=User::find($usuario->id);
+                foreach ($miArray as $key => $value) {
+                    $usuariorol->assignRole($value['0']);
+                }
+            }
+            
+            DB::commit();
+        }catch (\Exception $e) 
+        {
+        DB::rollback();
+            return response()->json(array('error' => 'No se ha podido guardar el registro'),404);         
+        }
         return response()->json($usuario);
     }
 
@@ -86,7 +107,7 @@ class UController extends Controller
     {
         $usuario=User::find($id);
         $roles=Role::all();
-        return view("seguridad.usuario.editarusuario")
+        return view("seguridad.usuario.edit")
             ->with("usuario",$usuario)
             ->with("roles",$roles);
     }
